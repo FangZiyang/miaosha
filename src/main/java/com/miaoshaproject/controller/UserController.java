@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: FangZiyang
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller("user")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
@@ -46,14 +48,4 @@ public class UserController {
         BeanUtils.copyProperties(userModel, userVO);
         return userVO;
     }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.OK)
-    public Object handleException(HttpServletRequest httpServletRequest, Exception ex) {
-        CommonReturnType commonReturnType = new CommonReturnType();
-        commonReturnType.setStatus("fail");
-        commonReturnType.setData(ex);
-        return commonReturnType;
-    }
-
 }
